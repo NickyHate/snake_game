@@ -167,17 +167,33 @@ button:active {
 
 /* Мобильная версия */
 @media (max-width: 500px) {
+    body {
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+
     .game-container {
         padding: 0.5rem;
         width: 95%;
-        max-height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .score-board {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .canvas-container {
+        margin: 10px 0;
     }
 
     #gameCanvas {
         width: 100%;
-        max-width: 400px;
+        max-width: 300px;
         height: auto;
         aspect-ratio: 1;
     }
@@ -185,24 +201,62 @@ button:active {
     .mobile-controls {
         display: flex;
         order: 2;
+        gap: 10px;
+        transform: scale(0.9);
     }
 
     .settings {
         order: 3;
-        margin: 10px 0;
-        padding: 10px;
+        margin: 5px 0;
+        padding: 8px;
+    }
+
+    .settings-control {
+        font-size: 14px;
     }
 
     .controls {
         order: 4;
         flex-direction: row;
-        gap: 10px;
+        gap: 8px;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 
     button {
-        padding: 8px 16px;
+        padding: 8px 12px;
         font-size: 14px;
         flex: 1;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .horizontal-controls {
+        gap: 15px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-height: 700px) {
+    #gameCanvas {
+        max-width: 250px;
+    }
+
+    .mobile-controls {
+        transform: scale(0.8);
+    }
+
+    .settings {
+        padding: 5px;
+    }
+
+    .controls button {
+        padding: 6px 10px;
+        font-size: 12px;
     }
 }
 
