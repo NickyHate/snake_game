@@ -1,17 +1,6 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var SnakeGame = /** @class */ (function () {
-    function SnakeGame() {
-        var _this = this;
+"use strict";
+class SnakeGame {
+    constructor() {
         var _a, _b, _c, _d, _e, _f;
         this.snake = [];
         this.food = { x: 0, y: 0 };
@@ -30,20 +19,19 @@ var SnakeGame = /** @class */ (function () {
         // Инициализация скорости из ползунка
         this.gameSpeed = 200 - parseInt(this.speedRange.value); // Инвертируем значение
         // Event Listeners
-        (_a = document.getElementById('startButton')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () { return _this.startGame(); });
-        (_b = document.getElementById('restartButton')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', function () { return _this.reset(); });
-        document.addEventListener('keydown', function (e) { return _this.handleKeyPress(e); });
+        (_a = document.getElementById('startButton')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => this.startGame());
+        (_b = document.getElementById('restartButton')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => this.reset());
+        document.addEventListener('keydown', (e) => this.handleKeyPress(e));
         // Добавляем слушатель для изменения скорости
-        this.speedRange.addEventListener('input', function () { return _this.updateSpeed(); });
+        this.speedRange.addEventListener('input', () => this.updateSpeed());
         // Добавляем обработчики для мобильных кнопок
-        (_c = document.getElementById('upButton')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', function () { return _this.handleMobileControl('up'); });
-        (_d = document.getElementById('downButton')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', function () { return _this.handleMobileControl('down'); });
-        (_e = document.getElementById('leftButton')) === null || _e === void 0 ? void 0 : _e.addEventListener('click', function () { return _this.handleMobileControl('left'); });
-        (_f = document.getElementById('rightButton')) === null || _f === void 0 ? void 0 : _f.addEventListener('click', function () { return _this.handleMobileControl('right'); });
+        (_c = document.getElementById('upButton')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => this.handleMobileControl('up'));
+        (_d = document.getElementById('downButton')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', () => this.handleMobileControl('down'));
+        (_e = document.getElementById('leftButton')) === null || _e === void 0 ? void 0 : _e.addEventListener('click', () => this.handleMobileControl('left'));
+        (_f = document.getElementById('rightButton')) === null || _f === void 0 ? void 0 : _f.addEventListener('click', () => this.handleMobileControl('right'));
         this.reset();
     }
-    SnakeGame.prototype.updateSpeed = function () {
-        var _this = this;
+    updateSpeed() {
         // Инвертируем значение, чтобы большее значение ползунка
         // соответствовало большей скорости
         this.gameSpeed = 200 - parseInt(this.speedRange.value);
@@ -51,10 +39,10 @@ var SnakeGame = /** @class */ (function () {
         // Если игра запущена, перезапускаем с новой скоростью
         if (this.gameInterval) {
             clearInterval(this.gameInterval);
-            this.gameInterval = window.setInterval(function () { return _this.gameLoop(); }, this.gameSpeed);
+            this.gameInterval = window.setInterval(() => this.gameLoop(), this.gameSpeed);
         }
-    };
-    SnakeGame.prototype.reset = function () {
+    }
+    reset() {
         this.snake = [{ x: 10, y: 10 }];
         this.direction = 'right';
         this.score = 0;
@@ -65,23 +53,22 @@ var SnakeGame = /** @class */ (function () {
             this.gameInterval = null;
         }
         this.draw();
-    };
-    SnakeGame.prototype.startGame = function () {
-        var _this = this;
+    }
+    startGame() {
         if (this.gameInterval)
             return;
-        this.gameInterval = window.setInterval(function () { return _this.gameLoop(); }, this.gameSpeed);
-    };
-    SnakeGame.prototype.generateFood = function () {
+        this.gameInterval = window.setInterval(() => this.gameLoop(), this.gameSpeed);
+    }
+    generateFood() {
         this.food = {
             x: Math.floor(Math.random() * (this.canvas.width / this.gridSize)),
             y: Math.floor(Math.random() * (this.canvas.height / this.gridSize))
         };
-    };
-    SnakeGame.prototype.handleKeyPress = function (event) {
+    }
+    handleKeyPress(event) {
         // Используем code вместо key для независимости от раскладки
-        var keyCode = event.code.toLowerCase();
-        var directions = {
+        const keyCode = event.code.toLowerCase();
+        const directions = {
             'arrowup': 'up',
             'arrowdown': 'down',
             'arrowleft': 'left',
@@ -91,9 +78,9 @@ var SnakeGame = /** @class */ (function () {
             'keya': 'left',
             'keyd': 'right' // code для клавиши D
         };
-        var newDirection = directions[keyCode];
+        const newDirection = directions[keyCode];
         if (newDirection) {
-            var opposites = {
+            const opposites = {
                 'up': 'down',
                 'down': 'up',
                 'left': 'right',
@@ -103,9 +90,9 @@ var SnakeGame = /** @class */ (function () {
                 this.direction = newDirection;
             }
         }
-    };
-    SnakeGame.prototype.handleMobileControl = function (direction) {
-        var opposites = {
+    }
+    handleMobileControl(direction) {
+        const opposites = {
             'up': 'down',
             'down': 'up',
             'left': 'right',
@@ -114,9 +101,9 @@ var SnakeGame = /** @class */ (function () {
         if (this.direction !== opposites[direction]) {
             this.direction = direction;
         }
-    };
-    SnakeGame.prototype.gameLoop = function () {
-        var head = __assign({}, this.snake[0]);
+    }
+    gameLoop() {
+        const head = Object.assign({}, this.snake[0]);
         switch (this.direction) {
             case 'up':
                 head.y--;
@@ -149,11 +136,11 @@ var SnakeGame = /** @class */ (function () {
             this.snake.pop();
         }
         this.draw();
-    };
-    SnakeGame.prototype.checkCollision = function (position) {
-        return this.snake.some(function (segment) { return segment.x === position.x && segment.y === position.y; });
-    };
-    SnakeGame.prototype.gameOver = function () {
+    }
+    checkCollision(position) {
+        return this.snake.some(segment => segment.x === position.x && segment.y === position.y);
+    }
+    gameOver() {
         if (this.gameInterval) {
             clearInterval(this.gameInterval);
             this.gameInterval = null;
@@ -163,17 +150,16 @@ var SnakeGame = /** @class */ (function () {
         this.ctx.fillStyle = 'white';
         this.ctx.font = '30px Arial';
         this.ctx.fillText('Game Over!', this.canvas.width / 2 - 70, this.canvas.height / 2);
-    };
-    SnakeGame.prototype.updateScore = function () {
-        var scoreElement = document.getElementById('score');
+    }
+    updateScore() {
+        const scoreElement = document.getElementById('score');
         if (scoreElement) {
             scoreElement.textContent = this.score.toString();
         }
-    };
-    SnakeGame.prototype.draw = function () {
-        var _this = this;
+    }
+    draw() {
         // Clear canvas with gradient background
-        var gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+        const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
         gradient.addColorStop(0, '#1f2937');
         gradient.addColorStop(1, '#111827');
         this.ctx.fillStyle = gradient;
@@ -181,23 +167,23 @@ var SnakeGame = /** @class */ (function () {
         // Draw grid (subtle)
         this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
         this.ctx.lineWidth = 0.5;
-        for (var i = 0; i < this.canvas.width; i += this.gridSize) {
+        for (let i = 0; i < this.canvas.width; i += this.gridSize) {
             this.ctx.beginPath();
             this.ctx.moveTo(i, 0);
             this.ctx.lineTo(i, this.canvas.height);
             this.ctx.stroke();
         }
-        for (var i = 0; i < this.canvas.height; i += this.gridSize) {
+        for (let i = 0; i < this.canvas.height; i += this.gridSize) {
             this.ctx.beginPath();
             this.ctx.moveTo(0, i);
             this.ctx.lineTo(this.canvas.width, i);
             this.ctx.stroke();
         }
         // Draw snake with gradient and glow effect
-        this.snake.forEach(function (segment, index) {
-            var isHead = index === 0;
+        this.snake.forEach((segment, index) => {
+            const isHead = index === 0;
             // Create gradient for snake segments
-            var segmentGradient = _this.ctx.createLinearGradient(segment.x * _this.gridSize, segment.y * _this.gridSize, (segment.x + 1) * _this.gridSize, (segment.y + 1) * _this.gridSize);
+            const segmentGradient = this.ctx.createLinearGradient(segment.x * this.gridSize, segment.y * this.gridSize, (segment.x + 1) * this.gridSize, (segment.y + 1) * this.gridSize);
             if (isHead) {
                 segmentGradient.addColorStop(0, '#4f46e5');
                 segmentGradient.addColorStop(1, '#3b82f6');
@@ -207,27 +193,27 @@ var SnakeGame = /** @class */ (function () {
                 segmentGradient.addColorStop(1, '#2563eb');
             }
             // Add glow effect
-            _this.ctx.shadowColor = '#3b82f6';
-            _this.ctx.shadowBlur = isHead ? 15 : 10;
-            _this.ctx.shadowOffsetX = 0;
-            _this.ctx.shadowOffsetY = 0;
+            this.ctx.shadowColor = '#3b82f6';
+            this.ctx.shadowBlur = isHead ? 15 : 10;
+            this.ctx.shadowOffsetX = 0;
+            this.ctx.shadowOffsetY = 0;
             // Draw segment
-            _this.ctx.fillStyle = segmentGradient;
-            _this.ctx.beginPath();
-            _this.ctx.roundRect(segment.x * _this.gridSize + 1, segment.y * _this.gridSize + 1, _this.gridSize - 2, _this.gridSize - 2, isHead ? 8 : 4);
-            _this.ctx.fill();
+            this.ctx.fillStyle = segmentGradient;
+            this.ctx.beginPath();
+            this.ctx.roundRect(segment.x * this.gridSize + 1, segment.y * this.gridSize + 1, this.gridSize - 2, this.gridSize - 2, isHead ? 8 : 4);
+            this.ctx.fill();
             // Reset shadow
-            _this.ctx.shadowBlur = 0;
+            this.ctx.shadowBlur = 0;
             // Add eyes for head
             if (isHead) {
-                _this.drawSnakeEyes(segment);
+                this.drawSnakeEyes(segment);
             }
         });
         // Draw food with pulsing effect
-        var time = Date.now() * 0.001; // Convert to seconds
-        var pulse = Math.sin(time * 4) * 0.1 + 0.9; // Pulsing between 0.8 and 1.0
-        var foodSize = this.gridSize * pulse;
-        var foodGradient = this.ctx.createRadialGradient(this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, 0, this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, foodSize / 2);
+        const time = Date.now() * 0.001; // Convert to seconds
+        const pulse = Math.sin(time * 4) * 0.1 + 0.9; // Pulsing between 0.8 and 1.0
+        const foodSize = this.gridSize * pulse;
+        const foodGradient = this.ctx.createRadialGradient(this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, 0, this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, foodSize / 2);
         foodGradient.addColorStop(0, '#ef4444');
         foodGradient.addColorStop(1, '#dc2626');
         this.ctx.shadowColor = '#ef4444';
@@ -237,12 +223,12 @@ var SnakeGame = /** @class */ (function () {
         this.ctx.arc(this.food.x * this.gridSize + this.gridSize / 2, this.food.y * this.gridSize + this.gridSize / 2, foodSize / 2 - 1, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.shadowBlur = 0;
-    };
-    SnakeGame.prototype.drawSnakeEyes = function (head) {
-        var eyeSize = this.gridSize / 6;
-        var eyeOffset = this.gridSize / 4;
+    }
+    drawSnakeEyes(head) {
+        const eyeSize = this.gridSize / 6;
+        const eyeOffset = this.gridSize / 4;
         // Определяем позиции глаз в зависимости от направления
-        var leftEyeX, leftEyeY, rightEyeX, rightEyeY;
+        let leftEyeX, leftEyeY, rightEyeX, rightEyeY;
         switch (this.direction) {
             case 'right':
                 leftEyeX = (head.x + 0.7) * this.gridSize;
@@ -283,10 +269,10 @@ var SnakeGame = /** @class */ (function () {
         this.ctx.arc(leftEyeX, leftEyeY, eyeSize / 2, 0, Math.PI * 2);
         this.ctx.arc(rightEyeX, rightEyeY, eyeSize / 2, 0, Math.PI * 2);
         this.ctx.fill();
-    };
-    return SnakeGame;
-}());
+    }
+}
 // Initialize game when window loads
-window.onload = function () {
+window.onload = () => {
     new SnakeGame();
 };
+//# sourceMappingURL=game.js.map
