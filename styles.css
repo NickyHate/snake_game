@@ -4,7 +4,10 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: linear-gradient(135deg, #1a1c20 0%, #0f1923 100%);
+    background-color: #0f172a;
+    background-image: 
+        radial-gradient(at 47% 33%, hsl(222, 67%, 15%) 0, transparent 59%), 
+        radial-gradient(at 82% 65%, hsl(218, 39%, 11%) 0, transparent 55%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
     overflow: hidden;
