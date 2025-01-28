@@ -172,4 +172,86 @@ button:active {
     font-family: monospace;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.mobile-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.horizontal-controls {
+    display: flex;
+    gap: 20px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(79, 70, 229, 0.2);
+    border: 2px solid #4f46e5;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:active {
+    background: rgba(79, 70, 229, 0.4);
+    transform: scale(0.95);
+}
+
+@media (max-width: 500px) {
+    .game-container {
+        padding: 1rem;
+        width: 95%;
+    }
+
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    .settings-control {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .range-container {
+        width: 100%;
+    }
+
+    .settings-control input[type="range"] {
+        width: 100%;
+    }
+
+    .settings-control label {
+        margin-bottom: 5px;
+    }
 } 

@@ -13,9 +13,19 @@
         <div class="settings">
             <div class="settings-control">
                 <label for="speedRange">Speed:</label>
-                <input type="range" id="speedRange" min="50" max="200" step="10" value="100">
-                <span id="speedValue">100</span>
+                <div class="range-container">
+                    <input type="range" id="speedRange" min="50" max="200" step="10" value="100">
+                    <span id="speedValue">100</span>
+                </div>
             </div>
+        </div>
+        <div class="mobile-controls">
+            <button id="upButton" class="control-btn">↑</button>
+            <div class="horizontal-controls">
+                <button id="leftButton" class="control-btn">←</button>
+                <button id="rightButton" class="control-btn">→</button>
+            </div>
+            <button id="downButton" class="control-btn">↓</button>
         </div>
         <div class="controls">
             <button id="startButton">Start Game</button>
