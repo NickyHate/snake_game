@@ -12,7 +12,7 @@ var __assign = (this && this.__assign) || function () {
 var SnakeGame = /** @class */ (function () {
     function SnakeGame() {
         var _this = this;
-        var _a, _b;
+        var _a, _b, _c, _d, _e, _f;
         this.snake = [];
         this.food = { x: 0, y: 0 };
         this.direction = 'right';
@@ -20,6 +20,9 @@ var SnakeGame = /** @class */ (function () {
         this.score = 0;
         this.gridSize = 20;
         this.gameSpeed = 100;
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.minSwipeDistance = 30; // Минимальное расстояние для свайпа
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.speedRange = document.getElementById('speedRange');
@@ -32,6 +35,11 @@ var SnakeGame = /** @class */ (function () {
         document.addEventListener('keydown', function (e) { return _this.handleKeyPress(e); });
         // Добавляем слушатель для изменения скорости
         this.speedRange.addEventListener('input', function () { return _this.updateSpeed(); });
+        // Добавляем обработчики для мобильных кнопок
+        (_c = document.getElementById('upButton')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', function () { return _this.handleMobileControl('up'); });
+        (_d = document.getElementById('downButton')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', function () { return _this.handleMobileControl('down'); });
+        (_e = document.getElementById('leftButton')) === null || _e === void 0 ? void 0 : _e.addEventListener('click', function () { return _this.handleMobileControl('left'); });
+        (_f = document.getElementById('rightButton')) === null || _f === void 0 ? void 0 : _f.addEventListener('click', function () { return _this.handleMobileControl('right'); });
         this.reset();
     }
     SnakeGame.prototype.updateSpeed = function () {
@@ -94,6 +102,17 @@ var SnakeGame = /** @class */ (function () {
             if (this.direction !== opposites[newDirection]) {
                 this.direction = newDirection;
             }
+        }
+    };
+    SnakeGame.prototype.handleMobileControl = function (direction) {
+        var opposites = {
+            'up': 'down',
+            'down': 'up',
+            'left': 'right',
+            'right': 'left'
+        };
+        if (this.direction !== opposites[direction]) {
+            this.direction = direction;
         }
     };
     SnakeGame.prototype.gameLoop = function () {

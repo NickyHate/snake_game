@@ -11,7 +11,6 @@ body {
     position: fixed;
     width: 100%;
     height: 100%;
-    -webkit-overflow-scrolling: touch; /* Для iOS */
 }
 
 .game-container {
@@ -35,7 +34,6 @@ body {
 .canvas-container {
     position: relative;
     margin: 20px 0;
-    touch-action: none;
 }
 
 #gameCanvas {
@@ -43,7 +41,56 @@ body {
     background: linear-gradient(45deg, #1f2937 0%, #111827 100%);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    touch-action: none;
+}
+
+.settings {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+
+.settings-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.settings-control input[type="range"] {
+    flex-grow: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.settings-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(45deg, #4f46e5 0%, #3b82f6 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    transition: all 0.3s ease;
+}
+
+.settings-control input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
 }
 
 .controls {
@@ -77,159 +124,6 @@ button:hover {
 button:active {
     transform: translateY(0);
     box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
-}
-
-/* Добавим анимацию для счета */
-@keyframes scoreUpdate {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-
-#score {
-    display: inline-block;
-    min-width: 40px;
-    animation: scoreUpdate 0.3s ease-out;
-}
-
-/* Добавим медиа-запрос для адаптивности */
-@media (max-width: 500px) {
-    .game-container {
-        padding: 0.5rem;
-        width: 95%;
-        max-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .score-board {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .canvas-container {
-        margin: 10px 0;
-        flex-shrink: 0;
-    }
-
-    #gameCanvas {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        aspect-ratio: 1;
-    }
-
-    .settings {
-        margin: 10px 0;
-        padding: 10px;
-    }
-
-    .controls {
-        flex-direction: row;
-        gap: 10px;
-        margin-top: 10px;
-    }
-
-    button {
-        padding: 8px 16px;
-        font-size: 14px;
-        flex: 1;
-    }
-
-    .settings-control {
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .range-container {
-        flex: 1;
-    }
-
-    .settings-control label {
-        font-size: 14px;
-        white-space: nowrap;
-    }
-}
-
-/* Добавим стили для Game Over */
-.game-over {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.settings {
-    margin: 20px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(4px);
-}
-
-.settings-control {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    color: white;
-    font-size: 16px;
-}
-
-.settings-control label {
-    min-width: 60px;
-}
-
-.settings-control input[type="range"] {
-    flex-grow: 1;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.settings-control input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(45deg, #4f46e5 0%, #3b82f6 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-    transition: all 0.3s ease;
-}
-
-.settings-control input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
-}
-
-.settings-control span {
-    min-width: 40px;
-    text-align: right;
-    font-family: monospace;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.range-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
 }
 
 .mobile-controls {
@@ -268,6 +162,7 @@ button:active {
     box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
 }
 
+/* Мобильная версия */
 @media (max-width: 500px) {
     .game-container {
         padding: 0.5rem;
@@ -277,6 +172,13 @@ button:active {
         flex-direction: column;
     }
 
+    #gameCanvas {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
     .mobile-controls {
         display: flex;
         order: 2;
@@ -284,40 +186,51 @@ button:active {
 
     .settings {
         order: 3;
+        margin: 10px 0;
+        padding: 10px;
     }
 
     .controls {
         order: 4;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+        flex: 1;
     }
 }
 
-.swipe-hint {
-    display: none;
+/* Game Over стили */
+.game-over {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 18px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-    animation: fadeInOut 2s ease-in-out infinite;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
 }
 
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.7; }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-@media (max-width: 500px) {
-    .swipe-hint {
-        display: block;
-    }
+@keyframes scoreUpdate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
-/* Удалим старые стили мобильных кнопок */
-.mobile-controls, .horizontal-controls, .control-btn {
-    display: none;
+#score {
+    display: inline-block;
+    min-width: 40px;
+    animation: scoreUpdate 0.3s ease-out;
 }
 
 /* Добавим стили для iOS */
