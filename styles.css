@@ -203,9 +203,51 @@ button:active {
     .mobile-controls {
         display: flex;
         order: 2;
-        gap: 15px;
-        transform: scale(1);
-        margin-bottom: 15px;
+        position: relative;
+        width: 100%;
+        height: 300px; /* Базовая высота для расчета процентов */
+        margin: 15px 0;
+    }
+
+    .horizontal-controls {
+        position: absolute;
+        width: 100%;
+        height: 80%;
+        top: 10%; /* Центрируем по вертикали */
+        display: flex;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .vertical-controls {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .control-btn {
+        width: 25%;
+        height: 100%;
+        font-size: 28px;
+        border-radius: 15px;
+        margin: 0;
+    }
+
+    /* Кнопки вверх/вниз */
+    .control-btn:first-child,
+    .control-btn:last-child {
+        width: 25%;
+        height: 40%;
+    }
+
+    /* Убираем scale и другие трансформации */
+    .mobile-controls {
+        transform: none;
     }
 
     .settings {
@@ -257,8 +299,7 @@ button:active {
     }
 
     .mobile-controls {
-        transform: scale(0.9);
-        margin: 10px 0;
+        height: 250px;
     }
 
     .settings {
