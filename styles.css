@@ -169,19 +169,19 @@ button:active {
 @media (max-width: 500px) {
     body {
         align-items: flex-start;
-        padding: 10px 0 70px;
+        padding: 10px 0 140px;
         min-height: -webkit-fill-available;
     }
 
     .game-container {
         padding: 0.5rem;
         width: 95%;
-        min-height: calc(100vh - 80px);
+        min-height: calc(100vh - 160px);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         gap: 10px;
-        margin-bottom: env(safe-area-inset-bottom, 20px);
+        margin-bottom: env(safe-area-inset-bottom, 40px);
     }
 
     .score-board {
@@ -203,9 +203,9 @@ button:active {
     .mobile-controls {
         display: flex;
         order: 2;
-        gap: 10px;
-        transform: scale(0.85);
-        margin-bottom: 10px;
+        gap: 15px;
+        transform: scale(1);
+        margin-bottom: 15px;
     }
 
     .settings {
@@ -229,27 +229,27 @@ button:active {
     }
 
     .control-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 65px;
+        height: 65px;
+        font-size: 24px;
     }
 
     .horizontal-controls {
-        gap: 15px;
+        gap: 25px;
     }
 }
 
 /* Для iPhone с вырезом */
 @supports (padding: max(0px)) {
     body {
-        padding-bottom: max(70px, env(safe-area-inset-bottom) + 20px);
+        padding-bottom: max(140px, env(safe-area-inset-bottom) + 40px);
     }
 }
 
 /* Для очень маленьких экранов */
 @media (max-height: 700px) {
     body {
-        padding-bottom: 90px;
+        padding-bottom: 180px;
     }
 
     #gameCanvas {
@@ -257,8 +257,8 @@ button:active {
     }
 
     .mobile-controls {
-        transform: scale(0.75);
-        margin: 5px 0;
+        transform: scale(0.9);
+        margin: 10px 0;
     }
 
     .settings {
@@ -267,7 +267,7 @@ button:active {
     }
 
     .controls {
-        margin-bottom: 25px;
+        margin-bottom: 35px;
     }
 
     button {
