@@ -5,7 +5,8 @@
         "strict": true,
         "outDir": "./",
         "sourceMap": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "esModuleInterop": true
     },
     "include": ["*.ts"],
     "exclude": ["node_modules"]
